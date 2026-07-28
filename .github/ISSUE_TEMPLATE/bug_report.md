@@ -1,31 +1,31 @@
 ---
 name: Bug Report
-about: Report a bug to help us improve
-title: '[BUG] '
+about: Create a report to help us improve
+title: "[BUG] "
 labels: bug
-assignees: ''
+assignees: Raphasha27
 
 ---
 
-## Bug Description
-A clear and concise description of the bug.
+**Describe the Bug**
+A clear and concise description of what the bug is.
 
-## Steps to Reproduce
-1. Go to '...'
-2. Click on '...'
-3. Scroll down to '...'
-4. See error
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Call endpoint '...'
+2. With payload '....'
+3. See error
 
-## Expected Behavior
-A clear description of what you expected to happen.
+**Expected Behavior**
+A clear and concise description of what you expected to happen.
 
-## Screenshots / Logs
-If applicable, add screenshots or log output.
+**Logs/Errors**
+If applicable, add logs or error messages.
 
-## Environment
-- OS: [e.g. Windows, Ubuntu, macOS]
-- Browser: [e.g. Chrome, Firefox]
-- Version: [e.g. v1.2.3]
+**Environment (please complete):**
+- OS: [e.g. Ubuntu 22.04]
+- Python Version: [e.g. 3.11]
+- Dependencies: [e.g. from requirements.txt]
 
-## Additional Context
+**Additional Context**
 Add any other context about the problem here.

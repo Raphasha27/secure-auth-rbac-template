@@ -1,52 +1,47 @@
-# secure-auth-rbac-template
-### Production-Grade Enterprise Platform
+# Secure Auth Rbac Template
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)
-![Build](https://github.com/Raphasha27/secure-auth-rbac-template/actions/workflows/ci.yml/badge.svg?style=flat-square)
-![Stars](https://img.shields.io/github/stars/Raphasha27/secure-auth-rbac-template?style=social)
+Production-grade FastAPI authentication template with JWT, RBAC, rate limiting, and security hardening
 
----
+## Features
 
-## 🚀 Key Features
-- **🧱 Domain-Driven Architecture**: Structured to maximize microservice clarity and separation of concerns.
-- **🛡️ Secure Scaffolding**: Built-in Zero-Trust guidelines, dependency scanners, and security workflows.
-- **⚡ CI/CD Integrated**: Complete linting, code parsing, and building checks configured dynamically.
+- authentication
+- fastapi
+- jwt
+- production
+- rbac
+- security
+- template
 
----
+## Getting Started
 
-## 🏗️ Architecture Design
-- **API Gateways**: Manages client entry interfaces and authentication relays.
-- **Services Layer**: Domain execution logic representing core system requirements.
-- **Persistence DB**: ACID-compliant databasing patterns.
-- **DevOps Core**: Containerized deployment blueprints.
+Clone the repository:
 
----
+```bash
+git clone https://github.com/Raphasha27/secure-auth-rbac-template.git
+cd secure-auth-rbac-template
+```
 
-## 🛠️ Technology Stack
-- **Primary Backend**: To be specified
-- **Frontend Layer**: Web UI elements
-- **DevOps Blueprint**: Docker & GitHub Actions CI
+## Language
 
----
+![Language](https://img.shields.io/badge/language-Python-blue)
 
-## 📦 Scaffolding & Setup
-
-1. **Clone the Repository**:
-   ```bash
-   git clone https://github.com/Raphasha27/secure-auth-rbac-template.git
-   cd secure-auth-rbac-template
-   ```
-
-2. **Configure Environment variables**:
-   ```bash
-   cp .env.example .env
-   ```
-
-3. **Deploy using Docker**:
-   ```bash
-   docker compose up --build
-   ```
+<br/>
 
 ---
 
-© 2026 **Kirov Dynamics Technology** | Developed by **Raphasha27**
+<h3 align="center">🐍 Part of the <a href="https://github.com/Raphasha27">Raphasha27</a> Ecosystem</h3>
+
+<p align="center">
+  <a href="https://github.com/Raphasha27/Raphasha27">
+    <img src="https://img.shields.io/badge/Back_to_Profile-0D1117?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  &nbsp;
+  <a href="https://raphasha27.github.io/Raphasha27/ai-snake-game/">
+    <img src="https://img.shields.io/badge/▶_Play_AI_Snake-0EA5E9?style=for-the-badge&logo=javascript&logoColor=white" />
+  </a>
+</p>
+
+## License
+
+Distributed under the Other.
+
