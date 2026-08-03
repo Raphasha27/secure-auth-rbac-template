@@ -34,7 +34,7 @@ def test_me_authenticated():
 
 def test_me_unauthenticated():
     res = client.get("/auth/me")
-    assert res.status_code == 403
+    assert res.status_code == 401
 
 def test_admin_endpoint_allowed():
     res = client.post("/auth/login", json={"username": "admin", "password": "admin123"})

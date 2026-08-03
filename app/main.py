@@ -2,7 +2,7 @@
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 from app.auth.jwt_handler import create_access_token, decode_token, get_password_hash, verify_password
-from app.roles.roles import Role, role_has_access
+from app.roles.roles import Role
 from app.permissions.permissions import Permission, has_permission
 
 app = FastAPI(title="Secure Auth + RBAC Template", version="1.0.0")

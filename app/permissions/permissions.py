@@ -1,5 +1,5 @@
 from enum import Enum
-from app.roles.roles import Role, role_has_access
+from app.roles.roles import Role
 
 class Permission(str, Enum):
     READ = "read"
