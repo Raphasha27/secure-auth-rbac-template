@@ -45,3 +45,9 @@ cd secure-auth-rbac-template
 
 Distributed under the Other.
 
+## Contributors
+
+This project is developed and maintained together with the team:
+- [Raphasha27](https://github.com/Raphasha27) — Project lead & maintainer
+- [KirovDynamicsTechnology](https://github.com/KirovDynamicsTechnology) — Kirov Dynamics (company)
+- [DkMash](https://github.com/DkMash) — Teammate
