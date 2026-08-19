@@ -1,12 +1,10 @@
-﻿# Contributing
+# Contributing to Secure Auth RBAC Template
 
-## Workflow
-1. Fork repository
-2. Create a feature branch
-3. Commit changes
-4. Open a Pull Request
+We love your input! We want to make contributing to this project as easy and transparent as possible.
 
-## Rules
-- Keep secrets out of commits
-- Follow clean code principles
-- Add tests where applicable
+## Pull Requests
+1. Fork the repo and create your branch from main.
+2. If you've added code that should be tested, add tests.
+3. If you've changed APIs, update the documentation.
+4. Ensure the test suite passes.
+5. Make sure your code lints.
