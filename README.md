@@ -3,17 +3,14 @@
 > **Live Now:** [https://secure-auth-rbac-template.vercel.app](https://secure-auth-rbac-template.vercel.app)
 > Run it instantly — no setup needed. Free-tier hosted build by Kirov Dynamics.
 
-Production-grade FastAPI authentication template with JWT, RBAC, rate limiting, and security hardening
+Production-grade FastAPI authentication template with JWT, RBAC, rate limiting, and security hardening.
 
 ## Features
 
-- authentication
-- fastapi
-- jwt
-- production
-- rbac
-- security
-- template
+- **JWT Authentication** — secure token issuance and verification (see `api/jwt_handler.py`)
+- **Role-Based Access Control** — role definitions and permission checks (see `api/roles.py`, `api/permissions.py`)
+- **Security Hardening** — rate limiting, middleware and production-ready defaults
+- **Live API** — interactive demo deployed on Vercel alongside a static frontend
 
 ## Getting Started
 
@@ -22,6 +19,8 @@ Clone the repository:
 ```bash
 git clone https://github.com/Raphasha27/secure-auth-rbac-template.git
 cd secure-auth-rbac-template
+pip install -r requirements.txt
+python app/main.py
 ```
 
 ## Language
@@ -46,15 +45,11 @@ cd secure-auth-rbac-template
 
 ## License
 
-Distributed under the Other.
+Distributed under the MIT License.
 
-<<<<<<< Updated upstream
 ## Contributors
 
 This project is developed and maintained together with the team:
 - [Raphasha27](https://github.com/Raphasha27) — Project lead & maintainer
 - [KirovDynamicsTechnology](https://github.com/KirovDynamicsTechnology) — Kirov Dynamics (company)
 - [DkMash](https://github.com/DkMash) — Teammate
-=======
-
->>>>>>> Stashed changes
