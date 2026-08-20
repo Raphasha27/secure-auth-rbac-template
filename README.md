@@ -1,3 +1,4 @@
+![CodeQL](https://github.com/Raphasha27/secure-auth-rbac-template/actions/workflows/codeql.yml/badge.svg)
 # Secure Auth Rbac Template
 
 > **Live Now:** [https://secure-auth-rbac-template.vercel.app](https://secure-auth-rbac-template.vercel.app)
@@ -53,3 +54,4 @@ This project is developed and maintained together with the team:
 - [Raphasha27](https://github.com/Raphasha27) — Project lead & maintainer
 - [KirovDynamicsTechnology](https://github.com/KirovDynamicsTechnology) — Kirov Dynamics (company)
 - [DkMash](https://github.com/DkMash) — Teammate
+

@@ -1,5 +1,7 @@
-﻿# Security Policy
+# Security Policy
+
+## Supported Versions
+Only the latest version of this project is currently supported with security updates.
 
 ## Reporting a Vulnerability
-Please report vulnerabilities privately via GitHub or email.
-Do not publish security issues publicly.
+Please do not report security vulnerabilities through public GitHub issues. Instead, please report them to the repository owner privately.
