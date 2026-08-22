@@ -1,16 +1,49 @@
-from fastapi import FastAPI, Depends
-from app.dependencies.rbac import require_role, Role, get_current_user
+"""Secure Auth RBAC Template — FastAPI application with role-based access control."""
 
-app = FastAPI(title="Secure Auth & RBAC API")
+from contextlib import asynccontextmanager
 
-@app.get("/public")
-async def public_data():
-    return {"message": "Anyone can see this"}
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
-@app.get("/user-profile", dependencies=[Depends(require_role([Role.USER, Role.ADMIN]))])
-async def user_profile(user: dict = Depends(get_current_user)):
-    return {"message": f"Welcome {user['username']}!"}
+from app.config import get_settings
+from app.models import Base
+from app.routers import admin, auth, content
 
-@app.get("/admin-dashboard", dependencies=[Depends(require_role([Role.ADMIN]))])
-async def admin_dashboard():
-    return {"message": "Super secret admin data"}
+settings = get_settings()
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> None:
+    """Create database tables on startup for development."""
+    from sqlalchemy.ext.asyncio import create_async_engine
+
+    engine = create_async_engine(settings.DATABASE_URL, echo=False)
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    yield
+
+
+app = FastAPI(
+    title="Secure Auth & RBAC API",
+    description="Role-Based Access Control with FastAPI — production-ready template.",
+    version="2.0.0",
+    lifespan=lifespan,
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.include_router(auth.router, prefix="/api/v1")
+app.include_router(admin.router, prefix="/api/v1")
+app.include_router(content.router, prefix="/api/v1")
+
+
+@app.get("/health")
+async def health_check() -> dict[str, str]:
+    """Liveness probe endpoint."""
+    return {"status": "ok", "service": "rbac-api"}
