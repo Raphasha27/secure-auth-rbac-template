@@ -2,7 +2,6 @@
 
 from collections.abc import AsyncGenerator, Callable
 from datetime import datetime, timedelta
-from functools import wraps
 from typing import Any
 
 from fastapi import Depends, HTTPException, Request, status
@@ -20,7 +19,11 @@ security = HTTPBearer()
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
     """Yield an async database session per request."""
-    from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+    from sqlalchemy.ext.asyncio import (
+        AsyncSession,
+        async_sessionmaker,
+        create_async_engine,
+    )
 
     engine = create_async_engine(settings.DATABASE_URL, echo=False)
     session_factory = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
