@@ -1,10 +1,9 @@
-from pydantic import BaseModel
-
 from fastapi import APIRouter, Depends, HTTPException, status
+from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.dependencies import get_current_user, get_db, require_role
+from app.dependencies import get_db, require_role
 from app.models import Permission, Role, User
 
 router = APIRouter(prefix="/admin", tags=["admin"])

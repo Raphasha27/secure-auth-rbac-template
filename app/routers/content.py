@@ -1,7 +1,7 @@
+from fastapi import APIRouter, Depends, status
 from pydantic import BaseModel
 
-from fastapi import APIRouter, Depends, status
-from app.dependencies import get_current_user, require_role, require_permission
+from app.dependencies import get_current_user, require_permission, require_role
 from app.models import User
 
 router = APIRouter(prefix="/content", tags=["content"])
