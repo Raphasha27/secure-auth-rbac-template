@@ -1,5 +1,5 @@
+import bcrypt
 from fastapi import APIRouter, Depends, HTTPException, status
-from passlib.context import CryptContext
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -8,7 +8,6 @@ from app.dependencies import create_access_token, get_current_user, get_db
 from app.models import Role, User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
-pwd_ctx = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class RegisterRequest(BaseModel):
@@ -23,12 +22,11 @@ class TokenResponse(BaseModel):
 
 
 class UserResponse(BaseModel):
+    model_config = {"from_attributes": True}
+
     id: int
     email: str
     username: str
-
-    class Config:
-        from_attributes = True
 
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
@@ -46,7 +44,7 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     user = User(
         email=req.email,
         username=req.email.split("@")[0],
-        hashed_password=pwd_ctx.hash(req.password),
+        hashed_password=bcrypt.hashpw(req.password.encode(), bcrypt.gensalt()).decode(),
         roles=[user_role],
     )
     db.add(user)
@@ -58,7 +56,7 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
 async def login(username: str, password: str, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).where(User.email == username))
     user = result.scalar_one_or_none()
-    if not user or not pwd_ctx.verify(password, user.hashed_password):
+    if not user or not bcrypt.checkpw(password.encode(), user.hashed_password.encode()):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     token = create_access_token(user.id)
     return TokenResponse(access_token=token)
