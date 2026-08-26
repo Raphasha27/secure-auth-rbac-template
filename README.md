@@ -1,3 +1,6 @@
+[![CI](https://github.com/Raphasha27/secure-auth-rbac-template/actions/workflows/ci.yml/badge.svg)](https://github.com/Raphasha27/secure-auth-rbac-template/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 # 🔐 Secure Auth + RBAC Template
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
