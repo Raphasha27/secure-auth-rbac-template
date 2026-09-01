@@ -1,0 +1,314 @@
+openapi: 3.0.3
+info:
+  title: Secure Auth & RBAC API
+  description: |
+    Role-Based Access Control system built with FastAPI.
+    Production-ready template for authentication, authorization, and fine-grained permission management.
+  version: 2.0.0
+  contact:
+    name: Secure Auth RBAC Support
+    url: https://github.com/Raphasha27/secure-auth-rbac-template
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+tags:
+  - name: auth
+    description: User registration, login, and profile management
+  - name: admin
+    description: Administrative operations — user listing and role management
+  - name: content
+    description: Content CRUD with role and permission-based access control
+  - name: Health
+    description: Service liveness probes
+
+paths:
+  /health:
+    get:
+      tags: [Health]
+      summary: Liveness probe
+      operationId: healthCheck
+      responses:
+        "200":
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: rbac-api
+
+  /auth/register:
+    post:
+      tags: [auth]
+      summary: Register a new user
+      description: Create a new user account with the default "user" role.
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, password, full_name]
+              properties:
+                email:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: secureP@ss123
+                full_name:
+                  type: string
+                  example: Jane Doe
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: Email already registered
+
+  /auth/login:
+    post:
+      tags: [auth]
+      summary: Login
+      description: Authenticate and receive a JWT access token.
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: secureP@ss123
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        "401":
+          description: Invalid credentials
+
+  /auth/me:
+    get:
+      tags: [auth]
+      summary: Get current user
+      description: Return the authenticated user's profile.
+      operationId: getMe
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+
+  /admin/users:
+    get:
+      tags: [admin]
+      summary: List all users
+      description: Admin-only endpoint to list all registered users.
+      operationId: listUsers
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    email:
+                      type: string
+                    username:
+                      type: string
+        "403":
+          description: Insufficient permissions (admin required)
+
+  /admin/roles:
+    post:
+      tags: [admin]
+      summary: Create a role
+      description: Create a new role with optional permissions. Admin only.
+      operationId: createRole
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  example: editor
+                permissions:
+                  type: array
+                  items:
+                    type: string
+                  example: ["content:write", "content:delete"]
+      responses:
+        "201":
+          description: Role created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  permissions:
+                    type: array
+                    items:
+                      type: string
+        "400":
+          description: Role already exists
+
+  /content:
+    get:
+      tags: [content]
+      summary: List content
+      description: List content items. Requires "user", "admin", or "editor" role.
+      operationId: listContent
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Content list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type: object
+    post:
+      tags: [content]
+      summary: Create content
+      description: Create a new content item. Requires "content:write" permission.
+      operationId: createContent
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title, body]
+              properties:
+                title:
+                  type: string
+                  example: "New Post"
+                body:
+                  type: string
+                  example: "This is the content body."
+      responses:
+        "201":
+          description: Content created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  body:
+                    type: string
+                  author:
+                    type: string
+
+  /content/{content_id}:
+    delete:
+      tags: [content]
+      summary: Delete content
+      description: Delete a content item. Requires "content:delete" permission.
+      operationId: deleteContent
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: content_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Content ID to delete
+      responses:
+        "200":
+          description: Content deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  deleted:
+                    type: integer
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIs...
+        token_type:
+          type: string
+          example: bearer
+
+    UserResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        email:
+          type: string
+          example: user@example.com
+        username:
+          type: string
+          example: user

@@ -25,8 +25,33 @@ async def lifespan(app: FastAPI) -> None:
 
 app = FastAPI(
     title="Secure Auth & RBAC API",
-    description="Role-Based Access Control with FastAPI — production-ready template.",
+    description=(
+        "Role-Based Access Control (RBAC) system built with FastAPI — a production-ready template "
+        "for authentication, authorization, and fine-grained permission management.\n\n"
+        "## Features\n"
+        "- **Authentication** — Register and login with JWT tokens\n"
+        "- **Role Management** — Create roles and assign permissions (admin only)\n"
+        "- **Content Management** — CRUD operations with role/permission guards\n"
+        "- **Access Control** — Enforce `require_role` and `require_permission` dependencies\n\n"
+        "## Roles & Permissions\n"
+        "Built-in roles: `user`, `admin`, `editor`. Custom roles can be created via the admin panel.\n"
+        "Permissions follow the `resource:action` pattern (e.g. `content:write`, `content:delete`)."
+    ),
     version="2.0.0",
+    contact={
+        "name": "Secure Auth RBAC Support",
+        "url": "https://github.com/Raphasha27/secure-auth-rbac-template",
+    },
+    license_info={
+        "name": "MIT",
+        "url": "https://opensource.org/licenses/MIT",
+    },
+    openapi_tags=[
+        {"name": "auth", "description": "User registration, login, and profile management"},
+        {"name": "admin", "description": "Administrative operations — user listing and role management"},
+        {"name": "content", "description": "Content CRUD with role and permission-based access control"},
+        {"name": "Health", "description": "Service liveness probes"},
+    ],
     lifespan=lifespan,
 )
 
