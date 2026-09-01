@@ -94,10 +94,12 @@ from app.dependencies.rbac import require_role, Role
 
 app = FastAPI()
 
+
 # Only ADMINs can access this endpoint
 @app.get("/admin/users", dependencies=[Depends(require_role([Role.ADMIN]))])
 async def get_all_users():
     return {"users": [...]}
+
 
 # ADMIN and MODERATOR can access
 @app.post("/mod/content", dependencies=[Depends(require_role([Role.ADMIN, Role.MODERATOR]))])

@@ -127,6 +127,7 @@ uvicorn app.main:app --reload
 ```python
 from app.dependencies.rbac import require_role, Role
 
+
 @app.get("/admin/users", dependencies=[Depends(require_role([Role.ADMIN]))])
 async def get_all_users():
     return {"users": [...]}
