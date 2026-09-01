@@ -10,9 +10,9 @@
 [![Test Coverage](https://img.shields.io/badge/test%20coverage-95%25-brightgreen)](https://github.com/Raphasha27/secure-auth-rbac-template)
 [![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker)](https://github.com/Raphasha27/secure-auth-rbac-template)
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=for-the-badge&logo=fastapi)
-![Security](https://img.shields.io/badge/Security-JWT%20%2B%20RBAC-red?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=flat-square&logo=python)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?style=flat-square&logo=fastapi)
+![Security](https://img.shields.io/badge/Security-JWT%20%2B%20RBAC-red?style=flat-square)
 
 </div>
 
